@@ -95,7 +95,8 @@ def test_connection(host="127.0.0.1", port=9876):
         result = recv_json_line(sock)
         
         if result.get("success"):
-            print(f"[OK] Created: {result.get('data', {}).get('name', 'unknown')}")
+            data = result.get("data", {})
+            print(f"[OK] Created: {data.get('name', data.get('object_name', 'unknown'))}")
         else:
             print(f"[FAIL] Error: {result.get('error', {}).get('message', 'Unknown error')}")
         
